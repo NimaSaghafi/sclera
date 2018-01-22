@@ -42,21 +42,24 @@ router.post('/authenticate', (req, res, next) => {
             }
             if(isMatch){
                 const token = jwt.sign({data:user}, config.secret, {
-                    expiresIn:604800
+                    expiresIn:604800 // 1 week
                 });
 
                 res.json({
                     success: true,
-                    token: 'Bearer ' + token,
+                    token:   'Bearer ' + token,
                     user: {
-                        id: user._id,
+                        id:       user._id,
                         username: user.username,
-                        email: user.email
+                        email:    user.email
                     }
                 });
             }
             else{
-                return res.json({success: false, msg: 'Wrong password'});
+                return res.json({
+                    success: false, 
+                    msg:     'Wrong password'
+                });
             }
         });
     });
