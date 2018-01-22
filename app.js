@@ -32,16 +32,22 @@ app.use(cors());
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Body Parser 
+// Body Parser
 app.use(bodyParser.json());
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
+
 app.use('/users', users);
 
 // Index Route
 app.get('/', (req, res) => {
     res.send('todo');
-})
+});
 
 // Start Server
 app.listen(port, () => {
     console.log('Server started on port ' + port);
-})
+});
