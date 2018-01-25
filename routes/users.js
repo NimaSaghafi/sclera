@@ -8,9 +8,10 @@ const config   = require('../config/database');
 // Register
 router.post('/register', (req, res, next) => {
     let newUser = new User({
-        email:    req.body.email,
-        username: req.body.username,
-        password: req.body.password
+        email:         req.body.email,
+        username:      req.body.username,
+        usernameLower: req.body.username.toLowerCase(),
+        password:      req.body.password
     });
 
     User.addUser(newUser, (err, user) =>{
@@ -68,6 +69,23 @@ router.post('/authenticate', (req, res, next) => {
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     res.json({user: req.user});
+});
+
+// Check if username already exists in DB
+router.post('/getuser', (req, res, next) => {
+    const username = req.body.username;
+
+    User.getUserByUsername(username, (err, user) => {
+        if(err){
+            throw err;
+        }
+        if(user){
+            return res.send(true);
+        }
+        else{
+            return res.send(false);
+        }
+    });
 });
 
 // Export router
