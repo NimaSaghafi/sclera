@@ -45,8 +45,8 @@ export class RegisterComponent implements OnInit {
     }
 
     // Check if username already exists.
-    if(this.authService.getUser(user).subscribe(found => { return found; })){
-        this.flashMessage.show('Username already exists',{cssClass: 'alert-danger', timeout: 3000});
+    if(this.authService.findUser(user).subscribe(found => { return found; })){
+        this.flashMessage.show('Username already exists. Usernames are not case sensitive.',{cssClass: 'alert-danger', timeout: 3000});
         return false;
     }
 
@@ -65,8 +65,8 @@ export class RegisterComponent implements OnInit {
     // Register new user
     this.authService.registerUser(user).subscribe(data => {
       if(data.success){
-        this.flashMessage.show('New user successfully registered',{cssClass: 'alert-success', timeout: 3000});
-        this.router.navigate(['/']);
+        this.flashMessage.show('New user registered',{cssClass: 'alert-success', timeout: 1000});
+        this.router.navigate(['/login']);
       }
       else{
         this.flashMessage.show('Unable to register new user',{cssClass: 'alert-success', timeout: 3000});

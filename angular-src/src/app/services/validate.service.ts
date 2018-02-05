@@ -14,6 +14,15 @@ export class ValidateService {
     }
   }
 
+  validateLogin(user){
+    if(user.username == undefined || user.password == undefined){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
   validateUsername(username){
     const re = /^\w+$/;
     if(username.length < 1 || username.length > 15){

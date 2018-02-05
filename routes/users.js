@@ -72,7 +72,7 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 });
 
 // Check if username already exists in DB
-router.post('/getuser', (req, res, next) => {
+router.post('/finduser', (req, res, next) => {
     const username = req.body.username;
 
     User.getUserByUsername(username, (err, user) => {

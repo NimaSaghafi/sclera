@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { ValidateService } from '../../services/validate.service';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,10 @@ export class LoginComponent implements OnInit {
   username: String;
   password: String;
 
-  constructor(private authService:  AuthService,
-              private router:       Router,
-              private flashMessage: FlashMessagesService){
+  constructor(private authService:     AuthService,
+              private validateService: ValidateService,
+              private router:          Router,
+              private flashMessage:    FlashMessagesService){
   }
 
   ngOnInit() {
@@ -24,6 +26,12 @@ export class LoginComponent implements OnInit {
     const user = {
       username: this.username,
       password: this.password
+    }
+
+    // Check if all fields are filled in form.
+    if(!this.validateService.validateLogin(user)){
+      this.flashMessage.show('Please fill in both fields',{cssClass: 'alert-danger', timeout: 3000});
+      return false;
     }
 
     this.authService.authenticateUser(user).subscribe(data => {
