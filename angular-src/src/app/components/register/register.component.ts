@@ -45,10 +45,16 @@ export class RegisterComponent implements OnInit {
     }
 
     // Check if username already exists.
-    if(this.authService.findUser(user).subscribe(found => { return found; })){
-        this.flashMessage.show('Username already exists. Usernames are not case sensitive.',{cssClass: 'alert-danger', timeout: 3000});
-        return false;
-    }
+    // if(this.authService.findUser(user).subscribe(found => { return found; })){
+    //     this.flashMessage.show('Username already exists. Usernames are not case sensitive.',{cssClass: 'alert-danger', timeout: 3000});
+    //     return false;
+    // }
+    // this.authService.findUser(user).subscribe(data => {
+    //   if(data.success){
+    //     this.flashMessage.show('Username already exists. Usernames are not case sensitive.',{cssClass: 'alert-danger', timeout: 3000});
+    //     return false;
+    //   };
+    // })
 
     // Check if provided passwords match.
     if(!(this.password === this.password2)){

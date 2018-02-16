@@ -80,10 +80,10 @@ router.post('/finduser', (req, res, next) => {
             throw err;
         }
         if(user){
-            return res.send(true);
+            return res.json({success: true, msg: 'User found'});
         }
         else{
-            return res.send(false);
+            return res.json({success: false, msg: 'User not found'});
         }
     });
 });
