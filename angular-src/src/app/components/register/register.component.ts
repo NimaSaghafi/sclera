@@ -44,19 +44,7 @@ export class RegisterComponent implements OnInit {
       return false;
     }
 
-    // Check if username already exists.
-    // if(this.authService.findUser(user).subscribe(found => { return found; })){
-    //     this.flashMessage.show('Username already exists. Usernames are not case sensitive.',{cssClass: 'alert-danger', timeout: 3000});
-    //     return false;
-    // }
-    // this.authService.findUser(user).subscribe(data => {
-    //   if(data.success){
-    //     this.flashMessage.show('Username already exists. Usernames are not case sensitive.',{cssClass: 'alert-danger', timeout: 3000});
-    //     return false;
-    //   };
-    // })
-
-    // Check if provided passwords match.
+      // Check if provided passwords match.
     if(!(this.password === this.password2)){
       this.flashMessage.show('Passwords do not match',{cssClass: 'alert-danger', timeout: 3000});
       return false;
@@ -75,7 +63,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/login']);
       }
       else{
-        this.flashMessage.show('Unable to register new user',{cssClass: 'alert-success', timeout: 3000});
+        this.flashMessage.show(data.msg, {cssClass: 'alert-danger', timeout: 3000});
         this.router.navigate(['/register']);
       }
     });

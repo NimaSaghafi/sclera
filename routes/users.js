@@ -16,7 +16,12 @@ router.post('/register', (req, res, next) => {
 
     User.addUser(newUser, (err, user) =>{
         if(err) {
-            res.json({success: false, msg: 'Failed to register user'});
+            if(err.code === 11000){ // Duplicate key error. _id and username must be unique. 
+                res.json({success: false, msg: 'Username is already in use'});
+            }
+            else{
+                res.json({success: false, msg: 'Failed to register user'});
+            }
         }
         else {
             res.json({success: true, msg: 'User succesfully registered'});
@@ -63,28 +68,6 @@ router.post('/authenticate', (req, res, next) => {
                 });
             }
         });
-    });
-});
-
-// Profile
-router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    res.json({user: req.user});
-});
-
-// Check if username already exists in DB
-router.post('/finduser', (req, res, next) => {
-    const username = req.body.username;
-
-    User.getUserByUsername(username, (err, user) => {
-        if(err){
-            throw err;
-        }
-        if(user){
-            return res.json({success: true, msg: 'User found'});
-        }
-        else{
-            return res.json({success: false, msg: 'User not found'});
-        }
     });
 });
 

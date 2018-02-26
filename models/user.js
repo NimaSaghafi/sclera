@@ -10,7 +10,8 @@ const UserSchema = mongoose.Schema({
 	},
 	username: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
 	usernameLower: {
 		type: String,
