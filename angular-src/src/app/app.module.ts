@@ -10,9 +10,11 @@ import { LoginComponent }      from './components/login/login.component';
 import { RegisterComponent }   from './components/register/register.component';
 import { HomeComponent }       from './components/home/home.component';
 import { ProfileComponent }    from './components/profile/profile.component';
+import { MessageComponent }    from './components/message/message.component';
 
 import { ValidateService }     from './services/validate.service';
 import { AuthService }         from './services/auth.service';
+import { ChatService }         from './services/chat.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard }           from './guards/auth.guard';
 
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot()
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, ChatService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule{}

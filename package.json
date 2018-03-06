@@ -21,6 +21,7 @@
     "express": "*",
     "jsonwebtoken": "*",
     "mongoose": "*",
+    "npm": "^5.7.1",
     "passport": "*",
     "passport-jwt": "*",
     "socket.io": "^2.0.4"

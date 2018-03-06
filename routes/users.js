@@ -39,7 +39,7 @@ router.post('/authenticate', (req, res, next) => {
             throw err;
         }
         if(!user){
-            return res.json({success: false, msg: 'User not found'});
+            return res.json({success: false, msg: 'Auth failed'});
         }
 
         User.comparePassword(password, user.password, (err, isMatch) => {
@@ -64,11 +64,16 @@ router.post('/authenticate', (req, res, next) => {
             else{
                 return res.json({
                     success: false, 
-                    msg:     'Wrong password'
+                    msg:     'Auth Failed'
                 });
             }
         });
     });
+});
+
+// Profile
+router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    res.json({user: req.user});
 });
 
 // Export router

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as socketIo from 'socket.io-client';
+import { ChatService }       from '../../services/chat.service';
+import * as socketIo         from 'socket.io-client';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,26 @@ import * as socketIo from 'socket.io-client';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  private url = 'http://localhost:3000';
+  chatmessage:   String;
+  messagefeed:   any;
 
-  constructor() {}
+  constructor(private chatService: ChatService) {}
 
   ngOnInit() {
-    const socket = socketIo('http://localhost:3000');
-    socket.on('hello', (data) => console.log(data));
+    // const socket = socketIo(this.url);
+    // socket.on('hello', (data) => console.log(data));
+    this.messagefeed = this.chatService.getChatMessages();
   }
 
+  onChatmessageSubmit(){
+    const msg = {
+      username: 'eye',
+      text:     this.chatmessage
+    }
+    this.chatService.saveChatMessage(msg).subscribe(data => {
+      console.log(data);
+    });
+
+  }
 }

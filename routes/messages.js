@@ -25,7 +25,7 @@ router.post('/',(req, res, next) => {
 router.get('/', (req, res, next) => {
     ChatMessage.find()
     .sort({_id:-1})
-    .limit(3)
+    .limit(5)
     .exec()
     .then(docs => { // find successful
         res.status(200).json(docs);

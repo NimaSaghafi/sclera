@@ -50,9 +50,6 @@ app.get('/', (req, res) => {
 });
 
 // Start Server
-// app.listen(port, () => {
-//     console.log('Server started on port ' + port);
-// });
 const server = require('http').Server(app);
 server.listen(port, () => {
     console.log('Server Started on port ' + port);
@@ -62,6 +59,7 @@ server.listen(port, () => {
 const socketio = require('socket.io');
 const io = socketio(server);
 io.on('connection', (socket) => { 
+
     console.log('new connection');
 
     socket.on('disconnect',() => {});
