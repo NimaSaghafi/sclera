@@ -60,12 +60,14 @@ const socketio = require('socket.io');
 const io = socketio(server);
 io.on('connection', (socket) => { 
 
-    console.log('new connection');
+    console.log('client connected');
 
-    socket.on('disconnect',() => {});
+    socket.on('disconnect',() => {
+        console.log('client disconnected');
+    });
 
-    socket.on('add-message', (msg) => {
-        io.emit('message', {type:'new-message', text: msg});
+    socket.on('new-message-added', (msg) => {
+        io.emit('new-message', msg);
     });
 });
 

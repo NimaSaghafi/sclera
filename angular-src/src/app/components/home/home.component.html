@@ -1,12 +1,12 @@
-<h2 class="page-header pt-5 text-center">chat</h2>
-  <div class="card col-sm-12 offset-sm-0 col-md-10 offset-md-1" style="height: 500px;">
+<h2 class="page-header pt-5 text-center text-muted">chat</h2>
+  <div #scroller class="card col-sm-12 offset-sm-0 col-md-10 offset-md-1" style="height: 500px; overflow: auto">
     <div id="chatmessages" class="card-block" *ngFor="let text of messagefeed | async">
       <app-message [chatmessage]=text></app-message>
     </div>
   </div>
 <form (submit)="onChatmessageSubmit()" class="pt-3">
     <div class="form-group row">
-      <input type="text" [(ngModel)]="chatmessage" name="chatmessage" class="form-control text-center col-sm-12 offset-sm-0 col-md-4 offset-md-4 bg-light" id="chatmessageInput" placeholder="enter a chat message">
+      <input type="text" [(ngModel)]="chatmessage" autocomplete="off" name="chatmessage" class="form-control text-center col-sm-12 offset-sm-0 col-md-4 offset-md-4 bg-light" id="chatmessageInput" placeholder="enter a chat message">
     </div>
     <div class="form-group row">
       <button type="submit" class="col-sm-12 offset-sm-0 col-md-2 offset-md-5 btn btn-light">submit</button>

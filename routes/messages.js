@@ -25,10 +25,10 @@ router.post('/',(req, res, next) => {
 router.get('/', (req, res, next) => {
     ChatMessage.find()
     .sort({_id:-1})
-    .limit(5)
+    .limit(50)
     .exec()
     .then(docs => { // find successful
-        res.status(200).json(docs);
+        res.status(200).json(docs.reverse());
     })
     .catch(err => { // find failed
         console.log(err);
