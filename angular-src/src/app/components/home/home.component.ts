@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
+import { AuthService } from '../../services/auth.service';
 import * as socketIo   from 'socket.io-client';
 
 @Component({
@@ -13,10 +14,22 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
   chatmessage: String;
   messagefeed: any;
   connection:  any;
+  username:    string;
   
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService,
+              private authService: AuthService ) {}
 
   ngOnInit() {
+    if(localStorage.getItem('id_token')){
+      this.authService.getProfile().subscribe(profile => {
+        this.username = profile.user.username;
+        console.log(this.username);
+      }, err => {
+        console.log(err);
+        return false;
+      });
+    }
+
     this.messagefeed = this.chatService.getChatMessages();
     this.connection  = this.chatService.getChatObservable().subscribe(data => {
       this.messagefeed = this.chatService.getChatMessages();
@@ -34,7 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
   onChatmessageSubmit(){
     if(this.chatmessage && this.chatmessage.length > 0){
       const msg = {
-        username: 'eye',
+        username: this.username,
         text:     this.chatmessage
       }
       this.chatService.saveChatMessage(msg).subscribe(data => {

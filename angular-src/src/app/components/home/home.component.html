@@ -6,9 +6,10 @@
   </div>
 <form (submit)="onChatmessageSubmit()" class="pt-3">
     <div class="form-group row">
-      <input type="text" [(ngModel)]="chatmessage" autocomplete="off" name="chatmessage" class="form-control text-center col-sm-12 offset-sm-0 col-md-4 offset-md-4 bg-light" id="chatmessageInput" placeholder="enter a chat message">
+      <input *ngIf="authService.loggedIn()" type="text" [(ngModel)]="chatmessage" autocomplete="off" name="chatmessage" class="form-control text-center col-sm-12 offset-sm-0 col-md-4 offset-md-4 bg-light" id="chatmessageInput" placeholder="enter a chat message">
+      <input *ngIf="!authService.loggedIn()" type="text" class="form-control text-center col-sm-12 offset-sm-0 col-md-4 offset-md-4 bg-light" disabled="disabled" placeholder="log in to chat">
     </div>
     <div class="form-group row">
-      <button type="submit" class="col-sm-12 offset-sm-0 col-md-2 offset-md-5 btn btn-light">submit</button>
+      <button *ngIf="authService.loggedIn()" type="submit" class="col-sm-12 offset-sm-0 col-md-2 offset-md-5 btn btn-light">submit</button>
     </div>
 </form>

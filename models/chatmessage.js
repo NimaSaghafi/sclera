@@ -11,6 +11,6 @@ const ChatMessageSchema = mongoose.Schema({
 	text: {
 		type: String,
 		required: true
-	}});
+	}}, { capped: { size:250000 } });
 
 module.exports = mongoose.model('ChatMessage', ChatMessageSchema);
