@@ -6,7 +6,7 @@ import * as socketio       from 'socket.io-client';
 
 @Injectable()
 export class ChatService {
-  private url = 'http://localhost:3000/messages';
+  private url = '/messages';
   private socket;
   authToken: any;
 

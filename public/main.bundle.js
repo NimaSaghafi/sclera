@@ -206,7 +206,6 @@ var HomeComponent = /** @class */ (function () {
     function HomeComponent(chatService, authService) {
         this.chatService = chatService;
         this.authService = authService;
-        this.url = 'http://localhost:3000';
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -876,7 +875,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ChatService = /** @class */ (function () {
     function ChatService(http) {
         this.http = http;
-        this.url = 'http://localhost:3000/messages';
+        this.url = '/messages';
     }
     ChatService.prototype.saveChatMessage = function (msg) {
         var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["Headers"]();
