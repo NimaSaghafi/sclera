@@ -8,11 +8,14 @@ import * as socketio       from 'socket.io-client';
 export class ChatService {
   private url = 'http://localhost:3000/messages';
   private socket;
+  authToken: any;
 
   constructor(private http:Http){}
  
   saveChatMessage(msg){
     let headers = new Headers();
+    this.authToken = localStorage.getItem('id_token');
+    headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.url, msg, {headers})
             .map(res => res.json());

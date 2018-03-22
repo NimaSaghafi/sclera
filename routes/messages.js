@@ -6,7 +6,7 @@ const jwt         = require('jsonwebtoken');
 const config      = require('../config/database');
 
 // Add a new message
-router.post('/',(req, res, next) => {
+router.post('/', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     const msg = new ChatMessage({
         username: req.body.username,
         text:     req.body.text
