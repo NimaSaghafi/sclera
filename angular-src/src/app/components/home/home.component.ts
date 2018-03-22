@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
   username:    string;
   
   constructor(private chatService: ChatService,
-              private authService: AuthService ) {}
+              public  authService: AuthService ) {}
 
   ngOnInit() {
     if(localStorage.getItem('id_token')){
