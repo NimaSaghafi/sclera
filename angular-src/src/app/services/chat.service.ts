@@ -29,13 +29,13 @@ export class ChatService {
   }
   
   emitNewMessageAdded(msg){
-    this.socket = socketio('http://localhost:3000');
+    this.socket = socketio('/');
     this.socket.emit('new-message-added', msg);
   }
 
   getChatObservable(){
     let obs = new Observable(observer => {
-      this.socket = socketio('http://localhost:3000');
+      this.socket = socketio('/');
       this.socket.on('new-message', data => {
         observer.next(data);
       });
