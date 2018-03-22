@@ -10,7 +10,6 @@ import * as socketIo   from 'socket.io-client';
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('scroller') private chatCard: ElementRef;
-  url = 'http://localhost:3000'
   chatmessage: String;
   messagefeed: any;
   connection:  any;
